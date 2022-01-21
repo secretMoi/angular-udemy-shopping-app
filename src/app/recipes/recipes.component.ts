@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {Recipe} from "./recipe.model";
 
 @Component({
@@ -6,6 +6,7 @@ import {Recipe} from "./recipe.model";
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.css']
 })
+@Injectable()
 export class RecipesComponent implements OnInit {
   selectedRecipe!: Recipe;
 
