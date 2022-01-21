@@ -1,5 +1,6 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {Recipe} from "./recipe.model";
+import {Ingredient} from "../shared/ingredient.model";
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,24 @@ export class RecipeService {
   recipeSelected = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
-    new Recipe('Test recipe', 'This is a test', 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=375,341'),
-    new Recipe('Another Test recipe', 'This is a test', 'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/classic-lasange-4a66137.jpg?quality=90&webp=true&resize=375,341')
+    new Recipe(
+      'Schnitzel',
+      'This is a test',
+      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/chorizo-mozarella-gnocchi-bake-cropped-9ab73a3.jpg?quality=90&webp=true&resize=375,341',
+      [
+        new Ingredient('Meat', 1),
+        new Ingredient('French fries', 20),
+      ]
+    ),
+    new Recipe(
+      'Burger',
+      'This is a test',
+      'https://images.immediate.co.uk/production/volatile/sites/30/2020/08/classic-lasange-4a66137.jpg?quality=90&webp=true&resize=375,341',
+      [
+        new Ingredient('Buns', 2),
+        new Ingredient('Meat', 1),
+      ]
+    )
   ];
 
   getRecipes(): Recipe[] {
