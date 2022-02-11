@@ -2,6 +2,7 @@ import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {RecipeService} from "../recipes/recipe.service";
 import {Recipe} from "../recipes/recipe.model";
+import {map} from "rxjs";
 
 @Injectable({
   providedIn: 'root' // permet de ne pas l'ajouter dans le appmodule.ts
@@ -26,7 +27,13 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    this.httpClientModule.get<Recipe[]>(this.recipesUrl).subscribe(
+    this.httpClientModule.get<Recipe[]>(this.recipesUrl)
+      .pipe(map(recipes => { // map de rxjs
+        return recipes.map(recipe => {
+          return {...recipe, ingredients: recipe.ingredients ? recipe.ingredients : []};
+        }) // map de tableau
+      }))
+      .subscribe(
       recipes => {
         console.log(recipes);
         this.recipeService.setRecipes(recipes)
