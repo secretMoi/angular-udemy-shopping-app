@@ -33,14 +33,7 @@ export class AuthService {
         password: password,
         returnSecureToken: true,
       }
-    ).pipe(catchError(AuthService.handleError),
-      tap(responseData => this.handleSignIn(
-        responseData.email,
-        responseData.localId,
-        responseData.idToken,
-        +responseData.expiresIn,
-      ))
-    );
+    ).pipe(catchError(AuthService.handleError));
   }
 
   login(email: string, password: string) {
@@ -52,7 +45,14 @@ export class AuthService {
         password: password,
         returnSecureToken: true,
       }
-    ).pipe(catchError(AuthService.handleError));
+    ).pipe(catchError(AuthService.handleError),
+      tap(responseData => this.handleSignIn(
+        responseData.email,
+        responseData.localId,
+        responseData.idToken,
+        +responseData.expiresIn,
+      ))
+    );
   }
 
   private handleSignIn(email: string, userId: string, token: string, expiresIn: number) {
