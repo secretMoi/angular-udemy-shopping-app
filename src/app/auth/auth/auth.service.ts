@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
-import {Personal} from "../../shared/personal";
+import {PersonalLogs} from "../../shared/personalLogs";
 
 interface AuthResponseData { // type de retour du post
   idToken: string;
@@ -17,7 +17,7 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
-    private personal: Personal
+    private personal: PersonalLogs
   ) {}
 
   signUp(email: string, password: string) {
