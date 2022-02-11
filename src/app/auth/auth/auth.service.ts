@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
+import {Personal} from "../../shared/personal";
 
 interface AuthResponseData { // type de retour du post
   idToken: string;
@@ -7,21 +8,20 @@ interface AuthResponseData { // type de retour du post
   refreshToken: string;
   expiresIn: string;
   localId: string;
-  registered: boolean;
 }
 
 @Injectable({
   providedIn: 'root' // permet de ne pas l'ajouter dans le appmodule.ts
 })
 export class AuthService {
-  private apiKey: string = 'AIzaSyB1Og82cAbA_T9stZHDII51QsFLZfQHNsA';
 
   constructor(
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private personal: Personal
   ) {}
 
   signUp(email: string, password: string) {
-    let signUpUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.apiKey;
+    let signUpUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + this.personal.apiKey;
     return this.httpClient.post<AuthResponseData>(
       signUpUrl,
       {
