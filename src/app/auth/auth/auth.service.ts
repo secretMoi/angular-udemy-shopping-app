@@ -3,12 +3,13 @@ import {HttpClient} from "@angular/common/http";
 import {PersonalLogs} from "../../shared/personalLogs";
 import {catchError, throwError} from "rxjs";
 
-interface AuthResponseData { // type de retour du post
+export interface AuthResponseData { // type de retour du post
   idToken: string;
   email: string;
   refreshToken: string;
   expiresIn: string;
   localId: string;
+  registered?: boolean;
 }
 
 @Injectable({
@@ -44,5 +45,17 @@ export class AuthService {
 
       return throwError(errorMessage);
     }))
+  }
+
+  login(email: string, password: string) {
+    let signInUrl = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=' + this.personal.apiKey;
+    return this.httpClient.post<AuthResponseData>(
+      signInUrl,
+      {
+        email: email,
+        password: password,
+        returnSecureToken: true,
+      }
+    )
   }
 }
