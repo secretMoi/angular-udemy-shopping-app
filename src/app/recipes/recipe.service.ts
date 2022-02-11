@@ -33,6 +33,10 @@ export class RecipeService {
 
   constructor(private shoppingListService: ShoppingListService) {}
 
+  setRecipes(recipes: Recipe[]) {
+    this.recipes = recipes;
+    this.recipesChanged.next(this.recipes.slice());
+  }
 
   getRecipes(): Recipe[] {
     // retourne une copie du tableau sinon il sera passé par référence et pourra être modifié
