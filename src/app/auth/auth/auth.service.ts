@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {PersonalLogs} from "../../shared/personalLogs";
-import {catchError, Subject, tap, throwError} from "rxjs";
+import {BehaviorSubject, catchError, Subject, tap, throwError} from "rxjs";
 import {User} from "./user.model";
 
 export interface AuthResponseData { // type de retour du post
@@ -17,7 +17,9 @@ export interface AuthResponseData { // type de retour du post
   providedIn: 'root' // permet de ne pas l'ajouter dans le appmodule.ts
 })
 export class AuthService {
-  user = new Subject<User>()
+  // behavior, notifie les subscribers des event passés
+  // @ts-ignore
+  user = new BehaviorSubject<User>(null);
 
   constructor(
     private httpClient: HttpClient,
