@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {PersonalLogs} from "../shared/personalLogs";
 import {BehaviorSubject, catchError, Subject, tap, throwError} from "rxjs";
 import {User} from "./user.model";
+import {Router} from "@angular/router";
 
 export interface AuthResponseData { // type de retour du post
   idToken: string;
@@ -23,7 +24,8 @@ export class AuthService {
 
   constructor(
     private httpClient: HttpClient,
-    private personal: PersonalLogs
+    private router: Router,
+    private personal: PersonalLogs,
   ) {}
 
   signUp(email: string, password: string) {
@@ -55,6 +57,13 @@ export class AuthService {
         +responseData.expiresIn,
       ))
     );
+  }
+
+  logout() {
+    // @ts-ignore
+    this.user.next(null);
+
+    this.router.navigate(['/auth']);
   }
 
   private handleSignIn(email: string, userId: string, token: string, expiresIn: number) {
