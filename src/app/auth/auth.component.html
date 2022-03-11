@@ -2,9 +2,10 @@
 <!--  col md 6 prend la moitié de l'écran-->
 <!--  col-md-offset-3 centre-->
   <div class="col-xs-12 col-md-6 col-md-offset-3">
-    <div class="alert alert-danger" *ngIf="errorMessage">
-      <p>{{ errorMessage }}</p>
-    </div>
+<!--    <div class="alert alert-danger" *ngIf="errorMessage">-->
+<!--      <p>{{ errorMessage }}</p>-->
+<!--    </div>-->
+    <app-alert *ngIf="errorMessage" [message]="errorMessage"></app-alert>
 
     <div *ngIf="isLoading" style="text-align: center;">
       <app-loading-spinner></app-loading-spinner>
