@@ -8,7 +8,7 @@ import {RecipesResolverService} from "./recipes-resolver.service";
 import {RouterModule} from "@angular/router";
 
 const routes = [
-  { path: 'recipes', component: RecipesComponent, canActivate: [AuthGuard], children: [
+  { path: '', component: RecipesComponent, canActivate: [AuthGuard], children: [
       { path: '', component: RecipeStartComponent },
       { path: 'new', component: RecipeEditComponent }, // new doit être devant pour ne pas être lu comme l'id
       { path: ':id', component: RecipesDetailComponent, resolve: [RecipesResolverService] },
