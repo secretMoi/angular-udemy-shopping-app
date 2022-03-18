@@ -1,6 +1,6 @@
 import {Ingredient} from "../../shared/ingredient.model";
 import {Action} from "@ngrx/store";
-import {ADD_INGREDIENT} from "./shopping-list.actions";
+import * as ShoppingListActions from "./shopping-list.actions";
 
 const initialState = {
   ingredients: [
@@ -9,16 +9,18 @@ const initialState = {
   ]
 };
 
-export function shoppingListReducer(state = initialState, action: Action) {
+export function shoppingListReducer(state = initialState, action: ShoppingListActions.AddIngredient) {
   switch (action.type) {
-    case ADD_INGREDIENT:
+    case ShoppingListActions.ADD_INGREDIENT:
       // state.ingredients.push() interdit !!!
 
       return {
         ...state, // fais une copie des données (state)
-        ingredients: [...state.ingredients, action] // recopie les ingrédients + ajoute le nouveau
+        ingredients: [...state.ingredients, action.payload] // recopie les ingrédients + ajoute le nouveau
       };
       break;
   }
+
+  return null;
 }
 
