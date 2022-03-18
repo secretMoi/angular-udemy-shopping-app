@@ -9,7 +9,11 @@ const initialState = {
   ]
 };
 
-export function shoppingListReducer(state = initialState, action: ShoppingListActions.AddIngredient) {
+export function shoppingListReducer(
+  state: { ingredients: (Ingredient | undefined)[]; } = initialState,
+  action: ShoppingListActions.AddIngredient
+) {
+
   switch (action.type) {
     case ShoppingListActions.ADD_INGREDIENT:
       // state.ingredients.push() interdit !!!
@@ -18,9 +22,8 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
         ...state, // fais une copie des données (state)
         ingredients: [...state.ingredients, action.payload] // recopie les ingrédients + ajoute le nouveau
       };
-      break;
+    default:
+      return state;
   }
-
-  return null;
 }
 
