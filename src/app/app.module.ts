@@ -9,7 +9,10 @@ import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core.module";
 import {StoreModule} from "@ngrx/store";
 import {shoppingListReducer} from "./shopping-list/store/shopping-list.reducer";
+import { reducers } from './shopping-list/store/index'
 
+// @ts-ignore
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +24,7 @@ import {shoppingListReducer} from "./shopping-list/store/shopping-list.reducer";
     SharedModule,
     HttpClientModule,
     CoreModule,
-    StoreModule.forRoot({shoppingList: shoppingListReducer})
+    StoreModule.forRoot(reducers),
   ],
   bootstrap: [AppComponent]
 })
